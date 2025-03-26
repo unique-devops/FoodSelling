@@ -1,0 +1,43 @@
+﻿@model FoodSelling.ViewModels.CategoryViewModel
+
+@{
+    ViewData["Title"] = "Add Category";
+}
+
+<h2>@ViewData["Title"]</h2>
+<a href="@Url.Action("Index", "AdminDashboard")" class="btn btn-secondary mt-3">Back to Dashboard</a>
+<form method="post">
+    <div class="form-group">
+        <label for="Title">Category Name</label>
+        <input type="text" class="form-control" id="Title" asp-for="Category.Title" required />
+        <label for="Description">Description</label>
+        <input type="text" class="form-control" id="Description" asp-for="Category.Description" required />
+        <span asp-validation-for="Category.Title" class="text-danger"></span>      
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Category</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model.Categories)
+        {
+            <tr>
+                <td>@category.Title</td>
+                <td>@category.Description</td>
+                <td>@category.CreatedAt.ToString("g")</td>
+                <td>@category.UpdatedAt.ToString("g")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

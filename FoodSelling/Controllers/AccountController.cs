@@ -1,62 +1,80 @@
 ﻿using FoodSelling.Models;
 using FoodSelling.Service;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodSelling.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly AuthService _authService;
-        public AccountController(AuthService authService)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
-            _authService = authService;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _roleManager = roleManager;
         }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterModel model)
+        {      
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    // Assign role
+                    await _userManager.AddToRoleAsync(user, model.Role);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "Home");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Login(string email, string password)
+        public async Task<IActionResult> Login(LoginModel model)
         {
-            var user = _authService.Login(email,password);
-            if (user != null)
+            if (ModelState.IsValid)
             {
-                //TempData["UserId"] = user.Id;
-                //TempData["Role"] = user.Role;
-                HttpContext.Session.SetInt32("userid", user.Id);
-                HttpContext.Session.SetString("role", user.Role);
-                return RedirectToAction("Index","Home");
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user != null)
+                {
+                    var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                }
             }
-            ViewBag.Error = "Invalid login credentials";
-            return View();
-        }
-        public IActionResult Register()
-        { 
-            return View();
+            return View(model);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Register(string email, string password)
+        public async Task<IActionResult> Logout()
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    // If validation fails, return bad request with validation errors
-            //    return BadRequest(ModelState);
-            //}
-            var result = await _authService.Register(email, password, "Customer");
-            if (result.Success)
-            {
-                return RedirectToAction("Login");
-            }
-            ViewBag.Error = result.Message;
-            return View();
-        }
-
-        public IActionResult Logout() {
-            //TempData.Clear();
-            HttpContext.Session.Clear();            
-            return RedirectToAction("Login");
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

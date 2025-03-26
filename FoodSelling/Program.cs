@@ -7,15 +7,29 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("con")));
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
+builder.Services.AddAuthentication().AddCookie(options => { 
+    options.LoginPath ="/Account/Login";
+    options.LogoutPath = "/";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("CustomerOnly", policy => policy.RequireRole("Customer"));
+});
+
+builder.Services.AddSession(options => {
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+});
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<AuthService>();
 builder.Services.AddSingleton<CartService>();
 builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSession(options => {
-    options.IdleTimeout = TimeSpan.FromMinutes(1);
-    options.Cookie.IsEssential = true;
-});
+
 
 builder.Services.AddHttpContextAccessor();
 
@@ -30,11 +44,22 @@ if (!app.Environment.IsDevelopment())
 else {
     app.UseDeveloperExceptionPage();
 }
+using (var scope = app.Services.CreateScope())
+{
+    var service = scope.ServiceProvider;
+    var userManager = service.GetRequiredService<UserManager<ApplicationUser>>();
+    var roleManager =  service.GetRequiredService<RoleManager<IdentityRole>>();
+
+    await SeedData.Initialize(service, userManager, roleManager);
+}
+
+
 app.UseSession();
 app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

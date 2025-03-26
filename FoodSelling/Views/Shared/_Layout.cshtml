@@ -1,6 +1,4 @@
-﻿@using FoodSelling.Service
-@inject AuthService authService;
-@{
+﻿@{
     ViewData["Title"] = "Food Selling";
 }
 
@@ -32,13 +30,16 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                        @*  @if (TempData["UserId"] != null) *@
-                        @if (authService.IsUserAuthenticated())
+                        @if (User.Identity.IsAuthenticated)
                                     {
                             <li class="nav-item">
                                 <span class="nav-link">Welcome, @TempData["Role"]</span>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Logout", "Account")">Logout</a>
+                            </li>
+                            <li class="nav-item">
+                                <span class="nav-link">Hello, @User.Identity.Name!</span>
                             </li>
                         }
                         else
