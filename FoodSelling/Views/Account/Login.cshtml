@@ -15,10 +15,12 @@
         <input type="password" id="password" name="Password" class="form-control" required />
     </div>
 
-    <button type="submit" class="btn btn-primary">Login</button>
-    @if (ViewBag.Error != null)
+    <button type="submit" class="btn btn-primary">Login</button>    
+    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
     {
-       <div class="alert alert-danger mt-2">@ViewBag.Error</div>
+        <div class="alert alert-danger">
+            @error.ErrorMessage
+        </div>
     }
 </form>
 

@@ -4,7 +4,7 @@
 }
 
 <h2>@ViewData["Title"]</h2>
-@if (!string.IsNullOrEmpty(Model.ImageUrl))
+@if (!string.IsNullOrEmpty(Model?.ImageUrl))
 {
     <img src="data:image/png;base64,@Model.ImageUrl" alt="Food Image" style="width: 200px; height: auto;" />
 }

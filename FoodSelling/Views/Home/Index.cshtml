@@ -15,13 +15,33 @@
                         <h5 class="card-title">@food.Name</h5>
                         <p class="card-text">@food.Description</p>
                         <p class="card-text">Price: $@food.Price</p>
-                        <form method="post" asp-action="AddToCart" asp-controller="Food">
+                        @* <form method="post" asp-action="AddToCart" asp-controller="Home">
                             <input type="hidden" name="foodId" value="@food.Id" />
                             <button type="submit" class="btn btn-primary">Add to Cart</button>
-                        </form>
+                        </form> *@
+                        <button type="button" class="btn btn-primary" onclick="addToCart(@food.Id)">Add to Cart</button>
                     </div>
                 </div>
             </div>
         }
     </div>
 </div>
+
+<script>
+    function addToCart(foodId) {
+        fetch(`/Home/AddToCart`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `foodId=${foodId}`
+        })
+            .then(response => response.text()) // handle response as text
+            .then(data => {
+                console.log(data); // Optional: log the result or handle it further
+                // Here you could do something like update the cart count dynamically,
+                // but without changing the UI immediately.
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>

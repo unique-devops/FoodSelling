@@ -29,12 +29,19 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+
+
                        @*  @if (TempData["UserId"] != null) *@
                         @if (User.Identity.IsAuthenticated)
-                                    {
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Cart")">
+                                    Cart:<span id="cart-count">@ViewData["CartCount"]</span>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <span class="nav-link">Welcome, @TempData["Role"]</span>
-                            </li>
+                            </li>                           
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Logout", "Account")">Logout</a>
                             </li>
@@ -69,7 +76,21 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.0/signalr.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/cartHub")
+            .build();
+
+        connection.start().catch(err => console.error(err.toString()));
+
+        connection.on("ReceiveCartCount", function (cartCount) {
+            document.getElementById("cart-count").textContent = cartCount;
+        });
+         
+    </script>  
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

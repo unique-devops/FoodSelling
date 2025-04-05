@@ -1,13 +1,17 @@
 using FoodSelling.Models;
 using FoodSelling.Service;
+using FoodSelling.SignalRHub;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<CartService>();
+builder.Services.AddSignalR();
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("con")));
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
 
 builder.Services.AddAuthentication().AddCookie(options => { 
     options.LoginPath ="/Account/Login";
@@ -27,7 +31,7 @@ builder.Services.AddSession(options => {
     options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
 });
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<CartService>();
+
 builder.Services.AddDistributedMemoryCache();
 
 
@@ -59,8 +63,13 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+
+
+
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapHub<CartHub>("/cartHub");
 
 app.MapControllerRoute(
     name: "default",
