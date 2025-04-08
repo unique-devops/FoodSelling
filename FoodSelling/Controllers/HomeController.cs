@@ -9,27 +9,18 @@ using System.Diagnostics;
 
 namespace FoodSelling.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly AppDbContext _appDbContext;
-        private readonly CartService _cartService;
-        private readonly UserManager<ApplicationUser> _userManager;
-        public HomeController(ILogger<HomeController> logger, AppDbContext appDbContext, CartService cartService, UserManager<ApplicationUser> userManager)
-        {
-            _logger = logger;
-            _appDbContext = appDbContext;
-            _cartService = cartService;
-            _userManager = userManager;
-        }
-        //public override void OnActionExecuting(ActionExecutingContext context)
-        //{
-        //    base.OnActionExecuting(context);
-
-        //    //var user = await _userManager.GetUserAsync(User); // Use session ID or authenticated user ID
-        //    //var cartCount = _cartService.GetCartCount(user.Email);
-        //    //ViewData["CartCount"] = cartCount;
-        //}
+              
+        public HomeController(
+            AppDbContext appDbContext,
+            CartService cartService,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            RoleManager<IdentityRole> roleManager)
+            : base(appDbContext, cartService, userManager, signInManager, roleManager)
+        {                       
+        }       
 
         [Authorize]
         public async Task<IActionResult> Index()
@@ -38,12 +29,10 @@ namespace FoodSelling.Controllers
             if (await _userManager.IsInRoleAsync(user, "Admin"))
             {
                 return RedirectToAction("Index", "AdminDashboard"); // Redirect to Admin dashboard
-            }           
-            var cartCount = await _cartService.GetCartCount(user?.Email);
-            ViewData["CartCount"] = cartCount;
+            }
             var foodItems = await _appDbContext.Foods.ToListAsync();
             return View(foodItems);
-        }
+        }        
 
         public IActionResult Privacy()
         {

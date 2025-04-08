@@ -4,13 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FoodSelling.Controllers
 {
-    public class OrderController : Controller
-    {
-        private readonly AppDbContext _appDbContext;
+    public class OrderController : BaseController
+    {       
 
-        public OrderController(AppDbContext appDbContext)
-        {
-            _appDbContext = appDbContext;
+        public OrderController(AppDbContext appDbContext) :base(appDbContext:appDbContext)
+        {           
         }
         public async Task<IActionResult> Index()
         {
@@ -25,7 +23,7 @@ namespace FoodSelling.Controllers
         {
             var order = await _appDbContext.Orders.Include(o => o.OrderItems)
                                               .ThenInclude(oi => oi.FoodItem)
-                                              .FirstOrDefaultAsync(o => o.Id == id);
+                                              .FirstOrDefaultAsync(o => o.OrderId == id);
             if (order == null)
             {
                 return NotFound();

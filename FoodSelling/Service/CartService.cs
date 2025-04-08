@@ -31,7 +31,7 @@ namespace FoodSelling.Service
         }
         public async Task<int> UpdateCart(string userId, int productId, int quantity)
         {           
-            var cartItem = _appDbContext.CartItems.FirstOrDefault(ci => ci.ProductId == productId && ci.UserId == userId);
+            var cartItem = await _appDbContext.CartItems.FirstOrDefaultAsync(ci => ci.ProductId == productId && ci.UserId == userId);
 
             if (cartItem != null && quantity > 0)
             {
@@ -63,13 +63,13 @@ namespace FoodSelling.Service
             return 0;
         }
 
-        public Task<List<CartItem>> GetCart(string userId)
+        public async Task<List<CartItem>> GetCart(string userId)
         {            
-            return _appDbContext.CartItems.Where(c=>c.UserId == userId).ToListAsync();
+            return await _appDbContext.CartItems.Where(c=>c.UserId == userId).ToListAsync();
         }
-        public Task<int> GetCartCount(string userId)
+        public async Task<int> GetCartCount(string userId)
         {
-            return _appDbContext.CartItems.CountAsync(c => c.UserId == userId);
+            return await _appDbContext.CartItems.CountAsync(c => c.UserId == userId);
         }
     }
 }

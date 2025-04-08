@@ -1,11 +1,13 @@
-﻿namespace FoodSelling.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FoodSelling.Models
 {
     public class OrderItem
     {
-        public int Id { get; set; }
+        [Key]
+        public int orderItemId { get; set; }
         public int OrderId { get; set; }
-
-        public Order Order { get; set; }
+        public virtual Order Order { get; set; }
         public int FoodItemId { get; set; }
 
         public Food FoodItem { get; set; }

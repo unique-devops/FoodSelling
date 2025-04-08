@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FoodSelling.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body>   
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -35,8 +35,11 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">Order</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Index", "Cart")">
-                                    Cart:<span id="cart-count">@ViewData["CartCount"]</span>
+                                    Cart:@await Component.InvokeAsync("Cart", new { userEmail = User.Identity.Name })
                                 </a>
                             </li>
                             <li class="nav-item">

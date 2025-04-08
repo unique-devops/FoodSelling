@@ -1,6 +1,7 @@
 using FoodSelling.Models;
 using FoodSelling.Service;
 using FoodSelling.SignalRHub;
+using FoodSelling.ViewComponents;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +12,7 @@ builder.Services.AddSignalR();
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("con")));
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
-
+builder.Services.AddTransient<CartViewComponent>();
 
 builder.Services.AddAuthentication().AddCookie(options => { 
     options.LoginPath ="/Account/Login";

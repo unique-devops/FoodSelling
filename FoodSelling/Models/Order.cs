@@ -4,7 +4,9 @@ namespace FoodSelling.Models
 {
     public class Order
     {
-        public int Id { get; set; }
+        [Key]
+
+        public int OrderId { get; set; }
         public string? CustomerName { get; set; }
 
         [Required]

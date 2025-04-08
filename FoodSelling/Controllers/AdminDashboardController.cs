@@ -8,12 +8,10 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace FoodSelling.Controllers
 {
-    public class AdminDashboardController : Controller
-    {
-        private readonly AppDbContext _appDbContext;
-        public AdminDashboardController(AppDbContext appDbContext)
-        {
-            _appDbContext = appDbContext;
+    public class AdminDashboardController : BaseController
+    {      
+        public AdminDashboardController(AppDbContext appDbContext) :base(appDbContext:appDbContext)
+        {           
         }
         [Authorize(Roles = "Admin")] // Only accessible by Admin role
         public async Task<IActionResult> Index()
@@ -38,11 +36,11 @@ namespace FoodSelling.Controllers
         {
             if (ModelState.IsValid)
             {
-                _appDbContext.Categories.Add(model.Category);
+                await _appDbContext.Categories.AddAsync(model.Category);
                 await _appDbContext.SaveChangesAsync();
                 return RedirectToAction(nameof(AddCategory)); // Redirect after successful addition
             }
-            model.Categories = _appDbContext.Categories.ToList();
+            model.Categories = await _appDbContext.Categories.ToListAsync();
             return View(model); // If validation fails, return with errors
         }
 
@@ -54,7 +52,7 @@ namespace FoodSelling.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddFood(Food food, IFormFile image)
+        public async Task<IActionResult> AddFood(Food food, IFormFile? image)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +65,7 @@ namespace FoodSelling.Controllers
                         food.ImageUrl = Convert.ToBase64String(imageBytes); // Convert to Base64
                     }
                 }
-                _appDbContext.Foods.Add(food);
+                await _appDbContext.Foods.AddAsync(food);
                 await _appDbContext.SaveChangesAsync();
                 return RedirectToAction(nameof(AddFood)); // Redirect after successful addition
             }
