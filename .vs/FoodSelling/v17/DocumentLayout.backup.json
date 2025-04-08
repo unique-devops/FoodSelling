@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "D:\\EsUser\\Roshan\\Learning\\FoodSelling\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{265492A3-D27B-4B72-8DC0-9CED6A24BF86}|FoodSelling\\FoodSelling.csproj|d:\\esuser\\roshan\\learning\\foodselling\\foodselling\\controllers\\admindashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{265492A3-D27B-4B72-8DC0-9CED6A24BF86}|FoodSelling\\FoodSelling.csproj|solutionrelative:foodselling\\controllers\\admindashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{265492A3-D27B-4B72-8DC0-9CED6A24BF86}|FoodSelling\\FoodSelling.csproj|d:\\esuser\\roshan\\learning\\foodselling\\foodselling\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{265492A3-D27B-4B72-8DC0-9CED6A24BF86}|FoodSelling\\FoodSelling.csproj|solutionrelative:foodselling\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{265492A3-D27B-4B72-8DC0-9CED6A24BF86}|FoodSelling\\FoodSelling.csproj|d:\\esuser\\roshan\\learning\\foodselling\\foodselling\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{265492A3-D27B-4B72-8DC0-9CED6A24BF86}|FoodSelling\\FoodSelling.csproj|solutionrelative:foodselling\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{265492A3-D27B-4B72-8DC0-9CED6A24BF86}|FoodSelling\\FoodSelling.csproj|d:\\esuser\\roshan\\learning\\foodselling\\foodselling\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{265492A3-D27B-4B72-8DC0-9CED6A24BF86}|FoodSelling\\FoodSelling.csproj|solutionrelative:foodselling\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{265492A3-D27B-4B72-8DC0-9CED6A24BF86}|FoodSelling\\FoodSelling.csproj|d:\\esuser\\roshan\\learning\\foodselling\\foodselling\\views\\order\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -21,10 +17,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{265492A3-D27B-4B72-8DC0-9CED6A24BF86}|FoodSelling\\FoodSelling.csproj|d:\\esuser\\roshan\\learning\\foodselling\\foodselling\\views\\order\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{265492A3-D27B-4B72-8DC0-9CED6A24BF86}|FoodSelling\\FoodSelling.csproj|solutionrelative:foodselling\\views\\order\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{265492A3-D27B-4B72-8DC0-9CED6A24BF86}|FoodSelling\\FoodSelling.csproj|d:\\esuser\\roshan\\learning\\foodselling\\foodselling\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{265492A3-D27B-4B72-8DC0-9CED6A24BF86}|FoodSelling\\FoodSelling.csproj|solutionrelative:foodselling\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{265492A3-D27B-4B72-8DC0-9CED6A24BF86}|FoodSelling\\FoodSelling.csproj|d:\\esuser\\roshan\\learning\\foodselling\\foodselling\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -66,7 +58,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -82,20 +74,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "OrderController.cs",
-              "DocumentMoniker": "D:\\EsUser\\Roshan\\Learning\\FoodSelling\\FoodSelling\\Controllers\\OrderController.cs",
-              "RelativeDocumentMoniker": "FoodSelling\\Controllers\\OrderController.cs",
-              "ToolTip": "D:\\EsUser\\Roshan\\Learning\\FoodSelling\\FoodSelling\\Controllers\\OrderController.cs",
-              "RelativeToolTip": "FoodSelling\\Controllers\\OrderController.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAowCoAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T11:18:38.495Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "Category.cs",
               "DocumentMoniker": "D:\\EsUser\\Roshan\\Learning\\FoodSelling\\FoodSelling\\Models\\Category.cs",
               "RelativeDocumentMoniker": "FoodSelling\\Models\\Category.cs",
@@ -108,7 +87,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
               "Title": "Register.cshtml",
               "DocumentMoniker": "D:\\EsUser\\Roshan\\Learning\\FoodSelling\\FoodSelling\\Views\\Account\\Register.cshtml",
               "RelativeDocumentMoniker": "FoodSelling\\Views\\Account\\Register.cshtml",
@@ -121,7 +100,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 8,
               "Title": "Login.cshtml",
               "DocumentMoniker": "D:\\EsUser\\Roshan\\Learning\\FoodSelling\\FoodSelling\\Views\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "FoodSelling\\Views\\Account\\Login.cshtml",
@@ -134,7 +113,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 7,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\EsUser\\Roshan\\Learning\\FoodSelling\\FoodSelling\\Views\\Checkout\\Index.cshtml",
               "RelativeDocumentMoniker": "FoodSelling\\Views\\Checkout\\Index.cshtml",
@@ -147,7 +126,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 11,
               "Title": "Default.cshtml",
               "DocumentMoniker": "D:\\EsUser\\Roshan\\Learning\\FoodSelling\\FoodSelling\\Views\\Shared\\Components\\Cart\\Default.cshtml",
               "RelativeDocumentMoniker": "FoodSelling\\Views\\Shared\\Components\\Cart\\Default.cshtml",
@@ -160,7 +139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 10,
               "Title": "CartService.cs",
               "DocumentMoniker": "D:\\EsUser\\Roshan\\Learning\\FoodSelling\\FoodSelling\\Service\\CartService.cs",
               "RelativeDocumentMoniker": "FoodSelling\\Service\\CartService.cs",
@@ -173,7 +152,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "20250324121727_updateUser.cs",
               "DocumentMoniker": "D:\\EsUser\\Roshan\\Learning\\FoodSelling\\FoodSelling\\Migrations\\20250324121727_updateUser.cs",
               "RelativeDocumentMoniker": "FoodSelling\\Migrations\\20250324121727_updateUser.cs",
@@ -199,20 +178,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AdminDashboardController.cs",
-              "DocumentMoniker": "D:\\EsUser\\Roshan\\Learning\\FoodSelling\\FoodSelling\\Controllers\\AdminDashboardController.cs",
-              "RelativeDocumentMoniker": "FoodSelling\\Controllers\\AdminDashboardController.cs",
-              "ToolTip": "D:\\EsUser\\Roshan\\Learning\\FoodSelling\\FoodSelling\\Controllers\\AdminDashboardController.cs",
-              "RelativeToolTip": "FoodSelling\\Controllers\\AdminDashboardController.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAcwDgAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-07T09:30:07.016Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Details.cshtml",
               "DocumentMoniker": "D:\\EsUser\\Roshan\\Learning\\FoodSelling\\FoodSelling\\Views\\Order\\Details.cshtml",
               "RelativeDocumentMoniker": "FoodSelling\\Views\\Order\\Details.cshtml",
@@ -225,7 +191,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\EsUser\\Roshan\\Learning\\FoodSelling\\FoodSelling\\Views\\Order\\Index.cshtml",
               "RelativeDocumentMoniker": "FoodSelling\\Views\\Order\\Index.cshtml",
@@ -238,7 +204,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 6,
               "Title": "20250324112148_initialcreate.cs",
               "DocumentMoniker": "D:\\EsUser\\Roshan\\Learning\\FoodSelling\\FoodSelling\\Migrations\\20250324112148_initialcreate.cs",
               "RelativeDocumentMoniker": "FoodSelling\\Migrations\\20250324112148_initialcreate.cs",
@@ -251,7 +217,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 9,
               "Title": "BaseController.cs",
               "DocumentMoniker": "D:\\EsUser\\Roshan\\Learning\\FoodSelling\\FoodSelling\\Controllers\\BaseController.cs",
               "RelativeDocumentMoniker": "FoodSelling\\Controllers\\BaseController.cs",
