@@ -1,10 +1,12 @@
 ﻿using FoodSelling.Models;
 using FoodSelling.Service;
 using FoodSelling.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodSelling.Controllers
 {
+    [Authorize]
     public class CheckoutController : BaseController
     {
         public CheckoutController(AppDbContext appDbContext,CartService cartService):base(appDbContext:appDbContext,cartService:cartService)

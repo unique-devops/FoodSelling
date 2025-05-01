@@ -16,8 +16,33 @@ builder.Services.AddTransient<CartViewComponent>();
 
 builder.Services.AddAuthentication().AddCookie(options => { 
     options.LoginPath ="/Account/Login";
-    options.LogoutPath = "/";
+    //options.LogoutPath = "/";
     options.AccessDeniedPath = "/Account/AccessDenied";
+    options.Events.OnRedirectToLogin = context =>
+    {
+        if (context.Request.Headers["X-Requested-With"] == "XMLHttpRequest" ||
+            context.Request.Headers["Accept"].ToString().Contains("application/json"))
+        {
+            context.Response.StatusCode = 401;
+            return Task.CompletedTask;
+        }
+
+        context.Response.Redirect(context.RedirectUri);
+        return Task.CompletedTask;
+    };
+
+    options.Events.OnRedirectToAccessDenied = context =>
+    {
+        if (context.Request.Headers["X-Requested-With"] == "XMLHttpRequest" ||
+            context.Request.Headers["Accept"].ToString().Contains("application/json"))
+        {
+            context.Response.StatusCode = 403;
+            return Task.CompletedTask;
+        }
+
+        context.Response.Redirect(context.RedirectUri);
+        return Task.CompletedTask;
+    };
 });
 
 builder.Services.AddAuthorization(options =>

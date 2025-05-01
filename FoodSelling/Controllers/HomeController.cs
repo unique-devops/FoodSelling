@@ -22,17 +22,17 @@ namespace FoodSelling.Controllers
         {                       
         }       
 
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
-            if (await _userManager.IsInRoleAsync(user, "Admin"))
+            if (user != null && await _userManager.IsInRoleAsync(user, "Admin"))
             {
                 return RedirectToAction("Index", "AdminDashboard"); // Redirect to Admin dashboard
             }
             var foodItems = await _appDbContext.Foods.ToListAsync();
             return View(foodItems);
-        }        
+        }             
 
         public IActionResult Privacy()
         {
@@ -56,7 +56,9 @@ namespace FoodSelling.Controllers
         //    return Content("success");
 
         //}
-        //[HttpPost]
+        
+        [Authorize]
+        [HttpPost]
         public async Task<JsonResult> AddToCart(int foodId)
         {
             var user = await _userManager.GetUserAsync(User);

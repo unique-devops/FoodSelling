@@ -1,4 +1,5 @@
 ﻿using FoodSelling.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,7 @@ namespace FoodSelling.Controllers
         public OrderController(AppDbContext appDbContext) :base(appDbContext:appDbContext)
         {           
         }
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var orders = await _appDbContext.Orders.Include(o => o.OrderItems)
@@ -19,6 +21,7 @@ namespace FoodSelling.Controllers
             return View(orders);
         }
 
+        [Authorize]
         public async Task<IActionResult> Details(int id)
         {
             var order = await _appDbContext.Orders.Include(o => o.OrderItems)
@@ -30,7 +33,7 @@ namespace FoodSelling.Controllers
             }
             return View(order);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> ChangeStatus(int id, string status)
         {

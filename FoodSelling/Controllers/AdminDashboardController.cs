@@ -8,6 +8,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace FoodSelling.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminDashboardController : BaseController
     {      
         public AdminDashboardController(AppDbContext appDbContext) :base(appDbContext:appDbContext)
@@ -19,7 +20,7 @@ namespace FoodSelling.Controllers
             var foodItems = await _appDbContext.Foods.ToListAsync();
             return View(foodItems);
         }
-
+       
         public async Task<IActionResult> AddCategory()
         {
             var categories = await _appDbContext.Categories.ToListAsync();
