@@ -64,8 +64,17 @@ namespace FoodSelling.Controllers
             var user = await _userManager.GetUserAsync(User);
             var food = await _appDbContext.Foods.FindAsync(foodId);
             if (food == null) return Json(new { message = "failed" });
-            await _cartService.AddToCart(new CartItem { UserId = user.Email, ProductId = food.Id, Price = food.Price, ProductName = food.Name, Quantity = 1 });
-            return Json(new { message = "success" });
+            var isAlreadyAdded = await _appDbContext.CartItems.Where(c => c.UserId == user.Email && c.ProductId == foodId).FirstOrDefaultAsync();
+            if (isAlreadyAdded != null)
+            {
+                return Json(new { message = "Already added in cart." });
+            }
+            else
+            {
+                await _cartService.AddToCart(new CartItem { UserId = user.Email, ProductId = food.Id, Price = food.Price, ProductName = food.Name, Quantity = 1 });
+                return Json(new { message = "success" });
+            }
+            
 
         }
     }

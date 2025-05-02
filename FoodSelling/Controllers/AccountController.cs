@@ -71,11 +71,15 @@ namespace FoodSelling.Controllers
                     var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
                     if (result.Succeeded)
                     {
+                        if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                            return Json(new { success = true });
                         return RedirectToAction("Index", "Home");
                     }
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                 }
             }
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                return Json(new { success = false, errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
             return View(model);
         }
 
