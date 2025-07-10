@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="Email" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="Password" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>    
+    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+    {
+        <div class="alert alert-danger">
+            @error.ErrorMessage
+        </div>
+    }
+</form>
+
+<p>Don't have an account> <a href="@Url.Action("Register","Account")">Register here</a></p>

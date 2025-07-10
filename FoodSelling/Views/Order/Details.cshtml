@@ -1,0 +1,24 @@
+﻿@model Order
+
+<h2>Order Details</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Food Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderItems)
+        {
+            <tr>
+                <td>@item.FoodItem.Name</td>
+                <td>@item.Quantity</td>
+                <td>@item.FoodItem.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p><strong>Total Amount:</strong> @Model.TotalAmount</p>

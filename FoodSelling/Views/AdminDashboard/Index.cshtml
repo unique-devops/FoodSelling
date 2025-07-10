@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+@model IEnumerable<Food>
+
+<h1>Welcome, Admin!</h1>
+<p>This is the Admin Dashboard.</p>
+<a href="@Url.Action("AddCategory", "AdminDashboard")" class="btn btn-secondary mt-3">Add category</a>
+<a href="@Url.Action("AddFood", "AdminDashboard")" class="btn btn-secondary mt-3">Add Food</a>
+
+@foreach (var food in Model)
+{
+    <div>@food.Name</div>
+}

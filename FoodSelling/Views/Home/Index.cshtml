@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model IEnumerable<Food>
+
+<div class="container">
+    <h1 class="display-4">Foods</h1>
+    <div class="row">
+        @foreach (var food in Model)
+        {
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                <div class="card mb-4 shadow-sm">                   
+                    <img src="data:image/png;base64,@food.ImageUrl" class="card-img-top" alt="@food.Name" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@food.Name</h5>
+                        <p class="card-text">@food.Description</p>
+                        <p class="card-text">Price: $@food.Price</p>
+                        @* <form method="post" asp-action="AddToCart" asp-controller="Home">
+                            <input type="hidden" name="foodId" value="@food.Id" />
+                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        </form> *@
+                        <button type="button" class="btn btn-primary" onclick="addToCart(@food.Id)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    function addToCart(foodId) {
+        fetch(`/Home/AddToCart`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: `foodId=${foodId}`
+        })
+        .then(response => {
+            if (response.status === 401) {
+                    // User is not authenticated
+                    const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                    loginModal.show();
+                    throw new Error("Unauthorized"); // Stop further .then() execution
+            }
+            return response.json();
+        }) // handle response as text
+        .then(data => {
+            if (data?.message === 'success') {
+                    // Show toast or alert
+                    showToast("Item added to cart!", "bg-success");
+            }
+            else
+            {
+                    showToast(data?.message, "bg-primary");
+            }
+                // Optional: log the result or handle it further
+            // Here you could do something like update the cart count dynamically,
+            // but without changing the UI immediately.
+        })
+        .catch(error => {
+            if (error.message !== "Unauthorized") {
+                console.error('Error:', error);
+            }
+        });
+    }
+
+   
+</script>
